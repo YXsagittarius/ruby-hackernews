@@ -40,8 +40,7 @@ module RubyHackernews
         end
         current_level = level
         target << comment
-        # target = comment
-        comments = target
+        target = comment
       end
       return comments
     end
@@ -66,7 +65,11 @@ module RubyHackernews
     end
 
     def parse_comment(element)
-      text_html = element.search("span.comment").first.search("font").children.map { |x| x.inner_text }.join("\n")
+      # text_html = element.search("span.comment").first.search("font").children.map { |x| x.inner_text }.join("\n")
+      text_html = ""
+      element.search("span.comment").first.children.each do |ch|
+        text_html = ch.inner_html
+      end
       header = element.search("span.comhead").first
       voting = VotingInfoParser.new(element.search("td/center/a"), header).parse
       user_info = UserInfoParser.new(header).parse
