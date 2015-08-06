@@ -40,7 +40,8 @@ module RubyHackernews
         end
         current_level = level
         target << comment
-        target = comment
+        # target = comment
+        comments = target
       end
       return comments
     end
