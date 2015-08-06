@@ -21,7 +21,7 @@ module RubyHackernews
       link     = LinkInfoParser.new(link_segment).parse
       voting   = VotingInfoParser.new(@first_line.search("td/center/a"), @second_line.search("[@class='subtext']")[0]).parse
       user     = UserInfoParser.new(@second_line).parse
-      comments = CommentsInfoParser.new(@second_line).parse
+      comments = CommentsInfoParser.new(@second_line.search("[@class='subtext']")[0]).parse
       time     = TimeInfoParser.new(@second_line).parse
       return Entry.new(number, link, voting, user, comments, time)
     end
